@@ -1,0 +1,6 @@
+/* Syling for input page as a whole */
+.inputPageForm {
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-between;
+}
