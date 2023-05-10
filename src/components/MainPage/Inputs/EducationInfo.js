@@ -1,5 +1,6 @@
 // This section will have the user's education background
 import { Component } from "react";
+import InputField from "./InputField";
 
 class EducationInfo extends Component {
   constructor(props) {
@@ -13,87 +14,76 @@ class EducationInfo extends Component {
   }
 
   getSchoolName = (e) => {
-    this.setState(
-      {
-        schoolName: e.target.value,
-      },
-      () => {
-        this.handleInputChange();
-      }
-    );
+    this.setState({
+      schoolName: e.target.value,
+    });
   };
 
   getMajor = (e) => {
-    this.setState(
-      {
-        major: e.target.value,
-      },
-      () => {
-        this.handleInputChange();
-      }
-    );
+    this.setState({
+      major: e.target.value,
+    });
   };
 
   getCompletionDate = (e) => {
-    this.setState(
-      {
-        completionDate: e.target.value,
-      },
-      () => {
-        this.handleInputChange();
-      }
-    );
+    this.setState({
+      completionDate: e.target.value,
+    });
   };
 
-  handleInputChange = () => {
-    this.props.updateEducationInfo(
-      this.state.schoolName,
-      this.state.major,
-      this.state.completionDate
-    );
+  addEducationInfo = (e) => {
+    e.preventDefault();
+    const educationInfoObj = this.state;
+    this.props.updateEducationInfo(educationInfoObj);
   };
 
   render() {
     const { schoolName, major, completionDate } = this.state;
 
     return (
-      <div
-        className="EducationInfo"
-        style={{ border: "6px solid black", width: "fit-content" }}
-      >
-        <h2>Education Information</h2>
-        <div className="schoolNameSection">
-          <label htmlFor="schoolNameInput">School Name: </label>
-          <input
-            type="text"
-            name="schoolNameInput"
-            id="schoolNameInput"
-            value={schoolName}
-            onChange={this.getSchoolName}
-          />
+      <form onSubmit={this.addEducationInfo}>
+        <div className="EducationInfo">
+          <h2>Education Information</h2>
+          <div className="schoolNameSection">
+            <InputField
+              label="School Name: "
+              type="text"
+              name="schoolNameInput"
+              id="schoolNameInput"
+              value={schoolName}
+              onChange={this.getSchoolName}
+              placeholder="Your School's Name"
+            />
+          </div>
+          <div className="majorSection">
+            <InputField
+              label="Major: "
+              type="text"
+              name="majorInput"
+              id="majorInput"
+              value={major}
+              onChange={this.getMajor}
+              placeholder="Your Major"
+            />
+          </div>
+          <div className="completionDateSection">
+            <InputField
+              label="Completion Date: "
+              type="date"
+              name="completionDateInput"
+              id="completionDateInput"
+              value={completionDate}
+              onChange={this.getCompletionDate}
+            />
+          </div>
+          <button
+            className="addBtn addEducationBtn"
+            onClick={this.addEducationInfo}
+          >
+            ADD
+          </button>
         </div>
-        <div className="majorSection">
-          <label htmlFor="majorInput">Major : </label>
-          <input
-            type="text"
-            name="majorInput"
-            id="majorInput"
-            value={major}
-            onChange={this.getMajor}
-          />
-        </div>
-        <div className="completionDateSection">
-          <label htmlFor="completionDateInput">Completion Date : </label>
-          <input
-            type="date"
-            name="completionDateInput"
-            id="completionDateInput"
-            value={completionDate}
-            onChange={this.getCompletionDate}
-          />
-        </div>
-        <button className="addEducationBtn">ADD</button>
-      </div>
+      </form>
     );
   }
 }
