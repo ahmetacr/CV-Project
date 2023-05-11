@@ -1,35 +1,100 @@
 // In this part, user will fill out the general information regarging them
 import { Component } from "react";
+import InputField from "./InputField";
 
 class ExperienceInfo extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      companyName: "",
+      title: "",
+      mainTasks: "",
+      startDate: "",
+      endDate: "",
+    };
+  }
+
+  getInfo = (e, key) => {
+    this.setState({
+      [key]: e.target.value,
+    });
+  };
+
+  addExperienceInfo = () => {
+    const experienceInfoObj = this.state;
+    this.props.updateExperienceInfo(experienceInfoObj);
+
+    this.setState({
+      companyName: "",
+      title: "",
+      mainTasks: "",
+      startDate: "",
+      endDate: "",
+    });
+  };
+
   render() {
+    const { companyName, title, mainTasks, startDate, endDate } = this.state;
+
     return (
-      <div
-        className="ExperienceInfo"
-        style={{ border: "6px solid black", width: "fit-content" }}
-      >
+      <div className="ExperienceInfo">
         <h2>Experience Information</h2>
         <div className="companyNameSection">
-          <label htmlFor="companyNameInput">Company Name: </label>
-          <input type="text" name="companyNameInput" id="companyNameInput" />
+          <InputField
+            label="Company Name:"
+            type="text"
+            placeholder="Company Name"
+            value={companyName}
+            onChange={(e) => this.getInfo(e, "companyName")}
+          />
         </div>
         <div className="titleSection">
-          <label htmlFor="titleInput">Title: </label>
-          <input type="text" name="titleInput" id="titleInput" />
+          <InputField
+            label="Title: "
+            type="text"
+            id="titleInput"
+            placeholder="Job Title"
+            onChange={(e) => this.getInfo(e, "title")}
+            value={title}
+          />
         </div>
         <div className="mainTasksSection">
-          <label htmlFor="mainTasksInput">Main Tasks: </label>
-          <input type="text" name="mainTasksInput" id="mainTasksInput" />
+          <InputField
+            label="Main Tasks: "
+            name="mainTasksInput"
+            id="mainTasksInput"
+            type="text"
+            onChange={(e) => this.getInfo(e, "mainTasks")}
+            value={mainTasks}
+          />
         </div>
         <div className="startDateSection">
-          <label htmlFor="startDateInput">Start Date: </label>
-          <input type="date" name="startDateInput" id="startDateInput" />
+          <InputField
+            label="Start Date: "
+            type="date"
+            name="startDateInput"
+            id="startDateInput"
+            onChange={(e) => this.getInfo(e, "startDate")}
+            value={startDate}
+          />
         </div>
         <div className="endDateSection">
-          <label htmlFor="endDateInput">End Date: </label>
-          <input type="date" name="endDateInput" id="endDateInput" />
+          <InputField
+            label="End Date: "
+            type="date"
+            name="endDateInput"
+            id="endDateInput"
+            onChange={(e) => this.getInfo(e, "endDate")}
+            value={endDate}
+          />
         </div>
-        <button className="addExperienceBtn">ADD</button>
+        <button
+          className="addBtn addExperienceBtn"
+          onClick={this.addExperienceInfo}
+        >
+          ADD
+        </button>
       </div>
     );
   }
