@@ -1,9 +1,8 @@
 .footer {
-  position: absolute;
-  background-color: black;
-  bottom: 0;
-  width: 100%;
-  color: aliceblue;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  color: #333;
   text-align: center;
-  display: none;
+  font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
 }
