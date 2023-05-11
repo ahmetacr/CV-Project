@@ -1,5 +1,6 @@
 // In this part, user will fill out the general information regarging them
 import { Component } from "react";
+import InputField from "./InputField";
 
 class GeneralInfo extends Component {
   constructor(props) {
@@ -10,89 +11,59 @@ class GeneralInfo extends Component {
       email: "",
       tel: "",
     };
-
-    this.getName = this.getName.bind(this);
-    this.getEmail = this.getEmail.bind(this);
-    this.getTel = this.getTel.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  getName(e) {
+  getInfo = (e, key) => {
     this.setState(
       {
-        name: e.target.value,
+        [key]: e.target.value,
       },
       () => {
-        this.handleInputChange();
-        console.log(`${this.state.name} is the name!`);
+        this.props.updateGeneralInfo(
+          this.state.name,
+          this.state.email,
+          this.state.tel
+        );
       }
     );
-  }
-  getEmail(e) {
-    this.setState(
-      {
-        email: e.target.value,
-      },
-      () => {
-        this.handleInputChange();
-      }
-    );
-  }
-  getTel(e) {
-    this.setState(
-      {
-        tel: e.target.value,
-      },
-      () => {
-        this.handleInputChange();
-      }
-    );
-  }
-
-  handleInputChange() {
-    this.props.updateGeneralInfo(
-      this.state.name,
-      this.state.email,
-      this.state.tel
-    );
-  }
+  };
 
   render() {
     const { name, email, tel } = this.state;
     return (
-      <div
-        className="GeneralInfo"
-        style={{ border: "6px solid black", width: "fit-content" }}
-      >
+      <div className="GeneralInfo">
         <h2>General Information</h2>
         <div className="nameSection">
-          <label htmlFor="nameInput">Name: </label>
-          <input
+          <InputField
+            label="Name: "
             type="text"
             name="nameInput"
             id="nameInput"
-            onChange={this.getName}
+            onChange={(e) => this.getInfo(e, "name")}
             value={name}
+            placeholder="Your Name"
           />
         </div>
         <div className="emailSection">
-          <label htmlFor="emailInput">Email: </label>
-          <input
+          <InputField
+            label="Email: "
             type="email"
             name="emailInput"
             id="emailInput"
-            onChange={this.getEmail}
+            onChange={(e) => this.getInfo(e, "email")}
             value={email}
+            placeholder="Your Email"
           />
         </div>
         <div className="phoneSection">
-          <label htmlFor="phoneInput">Phone Number: </label>
-          <input
+          <InputField
+            label="Phone Number: "
             type="tel"
             name="phoneInput"
             id="phoneInput"
-            onChange={this.getTel}
+            onChange={(e) => this.getInfo(e, "tel")}
             value={tel}
+            placeholder="Your Phone Number"
           />
         </div>
       </div>
