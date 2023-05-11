@@ -3,6 +3,7 @@
   padding: 2rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .outputPageHeader {
@@ -12,14 +13,21 @@
   justify-content: center;
   gap: 1rem;
   padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
 }
 
 .outputPageHeader h2 {
   font-size: 1.8rem;
   margin: 0;
   font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
 }
+
+.educationOutput, .experienceOutput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 .headerInfoSection {
   text-align: center;
@@ -34,7 +42,6 @@
   font-weight: bold;
   padding-bottom: 0.5rem;
   margin-top: 1rem;
-  font-family: 'Open Sans', sans-serif;
 }
 
 .item {
@@ -51,17 +58,33 @@
   font-size: 1.2rem;
   margin: 0;
   font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
+}
+
+.item h4 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  font-weight: bold;
 }
 
 .item p {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
 }
 
 @media (min-width: 768px) {
   .outputPageHeader {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .item h3,
+  .item h4 {
+    grid-column: span 2;
   }
 }
