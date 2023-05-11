@@ -8,28 +8,17 @@ class Main extends Component {
     super(props);
     this.state = {
       generalInfo: {
-        name: "name",
-        email: "email",
-        phoneNumber: "phoneNumber",
+        name: "",
+        email: "",
+        phoneNumber: "",
       },
-      educationInfo: {
-        schoolName: "schoolName",
-        major: "major",
-        completionDate: "compDate",
-      },
-      experienceInfo: {
-        companyName: "compName",
-        title: "title",
-        mainTasks: "mainTasks",
-        startDate: "startDare",
-        endDate: "endDate",
-      },
+      educationInfoArr: [],
+      experienceInfoArr: [],
     };
-    this.updateGeneralInfo = this.updateGeneralInfo.bind(this);
-    this.updateEducationInfo = this.updateEducationInfo.bind(this);
   }
 
-  updateGeneralInfo(nameValue, emailValue, phoneNumberValue) {
+  updateGeneralInfo = (nameValue, emailValue, phoneNumberValue) => {
+    // call like an obj
     this.setState((prevState) => ({
       generalInfo: {
         ...prevState.generalInfo,
@@ -38,20 +27,19 @@ class Main extends Component {
         phoneNumber: phoneNumberValue,
       },
     }));
-  }
+  };
 
-  updateEducationInfo(schoolNameValue, majorValue, completionDateValue) {
+  updateEducationInfo = (educationInfoObj) => {
     this.setState((prevState) => ({
-      educationInfo: {
-        ...prevState.educationInfo,
-        schoolName: schoolNameValue,
-        major: majorValue,
-        completionDate: completionDateValue,
-      },
+      educationInfoArr: [...prevState.educationInfoArr, educationInfoObj],
     }));
-  }
+  };
 
-  handleSubmit(e) {}
+  updateExperienceInfo = (experienceInfoObj) => {
+    this.setState((prevState) => ({
+      experienceInfoArr: [...prevState.experienceInfoArr, experienceInfoObj],
+    }));
+  };
 
   render() {
     return (
@@ -60,6 +48,7 @@ class Main extends Component {
           handleSubmit={this.handleSubmit}
           updateGeneralInfo={this.updateGeneralInfo}
           updateEducationInfo={this.updateEducationInfo}
+          updateExperienceInfo={this.updateExperienceInfo}
         />
         <OutputPage info={this.state} />
       </div>
