@@ -21,7 +21,8 @@ class ExperienceInfo extends Component {
     });
   };
 
-  addExperienceInfo = () => {
+  addExperienceInfo = (e) => {
+    e.preventDefault();
     const experienceInfoObj = this.state;
     this.props.updateExperienceInfo(experienceInfoObj);
 

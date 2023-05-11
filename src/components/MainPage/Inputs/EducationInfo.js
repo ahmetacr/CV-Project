@@ -20,6 +20,7 @@ class EducationInfo extends Component {
   };
 
   addEducationInfo = (e) => {
+    e.preventDefault();
     const educationInfoObj = this.state;
     this.props.updateEducationInfo(educationInfoObj);
 
