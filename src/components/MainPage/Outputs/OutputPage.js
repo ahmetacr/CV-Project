@@ -2,30 +2,37 @@ import { Component } from "react";
 import "../../../styles/OutputPage.css";
 
 class OutputPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const { info } = this.props;
-    console.log(typeof info);
     return (
       <div className="outputPage">
         <div className="outputPageHeader">
-          <h2>{info.generalInfo.name} RESUME</h2>
+          <h2>{info.generalInfo.name} Resume</h2>
           <div className="headerInfoSection">
             <p>{info.generalInfo.email}</p>
             <p>{info.generalInfo.phoneNumber}</p>
           </div>
         </div>
         <div className="resumeContainer">
-          <div className="educationOutput">
-            <h1 className="educationOutputHeader">EDUCATION</h1>
-            <h2 id="shoolNameID">{info.educationInfo.schoolName}</h2>
-            <h2 id="shoolNameID">{info.educationInfo.major}</h2>
-            <h2 id="shoolNameID">
-              Completed in {info.educationInfo.completionDate}
-            </h2>
-          </div>
+          <section>
+            {info.educationInfoArr.map((item, index) => (
+              <div key={index} className="educationOutput">
+                <h2 id="shoolNameID">{item.schoolName}</h2>
+                <h2 id="majorID">{item.major}</h2>
+                <h2 id="completionDateID">Graduated: {item.completionDate}</h2>
+              </div>
+            ))}
+            {info.experienceInfoArr.map((item, index) => (
+              <div key={index} className="experienceOutput">
+                <h1 className="experienceOutputHeader">Experience</h1>
+                <h2 id="companyNameID">{item.companyName}</h2>
+                <h2 id="titleID">{item.title}</h2>
+                <h2 id="mainTasksID">{item.mainTasks}</h2>
+                <h2 id="startDateID">Worked from: {item.startDate}</h2>
+                <h2 id="endDateID">Worked to: {item.endDate}</h2>
+              </div>
+            ))}
+          </section>
         </div>
       </div>
     );
