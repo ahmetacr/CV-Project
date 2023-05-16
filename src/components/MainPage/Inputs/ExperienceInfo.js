@@ -1,104 +1,109 @@
 // In this part, user will fill out the general information regarging them
-import { Component } from "react";
+import React, { useState } from "react";
 import InputField from "./InputField";
 
-class ExperienceInfo extends Component {
-  constructor(props) {
-    super(props);
+const ExperienceInfo = (props) => {
+  const [companyName, setCompanyName] = useState("");
+  const [title, setTitle] = useState("");
+  const [mainTasks, setMainTasks] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-    this.state = {
-      companyName: "",
-      title: "",
-      mainTasks: "",
-      startDate: "",
-      endDate: "",
-    };
-  }
-
-  getInfo = (e, key) => {
-    this.setState({
-      [key]: e.target.value,
-    });
+  const handleCompanyNameChange = (e) => {
+    setCompanyName(e.target.value);
   };
 
-  addExperienceInfo = (e) => {
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleMainTasksChange = (e) => {
+    setMainTasks(e.target.value);
+  };
+
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  const addExperienceInfo = (e) => {
     e.preventDefault();
-    const experienceInfoObj = this.state;
-    this.props.updateExperienceInfo(experienceInfoObj);
+    const experienceInfoObj = {
+      companyName,
+      title,
+      mainTasks,
+      startDate,
+      endDate,
+    };
+    props.updateExperienceInfo(experienceInfoObj);
 
-    this.setState({
-      companyName: "",
-      title: "",
-      mainTasks: "",
-      startDate: "",
-      endDate: "",
-    });
+    setCompanyName("");
+    setTitle("");
+    setMainTasks("");
+    setStartDate("");
+    setEndDate("");
   };
 
-  render() {
-    const { companyName, title, mainTasks, startDate, endDate } = this.state;
-
-    return (
-      <div className="ExperienceInfo">
-        <h2>Experience Information</h2>
-        <div className="companyNameSection">
-          <InputField
-            label="Company Name:"
-            type="text"
-            placeholder="Company Name"
-            value={companyName}
-            onChange={(e) => this.getInfo(e, "companyName")}
-          />
-        </div>
-        <div className="titleSection">
-          <InputField
-            label="Title: "
-            type="text"
-            id="titleInput"
-            placeholder="Job Title"
-            onChange={(e) => this.getInfo(e, "title")}
-            value={title}
-          />
-        </div>
-        <div className="mainTasksSection">
-          <InputField
-            label="Main Tasks: "
-            name="mainTasksInput"
-            id="mainTasksInput"
-            type="text"
-            onChange={(e) => this.getInfo(e, "mainTasks")}
-            value={mainTasks}
-          />
-        </div>
-        <div className="startDateSection">
-          <InputField
-            label="Start Date: "
-            type="date"
-            name="startDateInput"
-            id="startDateInput"
-            onChange={(e) => this.getInfo(e, "startDate")}
-            value={startDate}
-          />
-        </div>
-        <div className="endDateSection">
-          <InputField
-            label="End Date: "
-            type="date"
-            name="endDateInput"
-            id="endDateInput"
-            onChange={(e) => this.getInfo(e, "endDate")}
-            value={endDate}
-          />
-        </div>
-        <button
-          className="addBtn addExperienceBtn"
-          onClick={this.addExperienceInfo}
-        >
-          ADD
-        </button>
+  return (
+    <div className="ExperienceInfo">
+      <h2>Experience Information</h2>
+      <div className="companyNameSection">
+        <InputField
+          label="Company Name:"
+          type="text"
+          placeholder="Company Name"
+          value={companyName}
+          onChange={handleCompanyNameChange}
+        />
       </div>
-    );
-  }
-}
+      <div className="titleSection">
+        <InputField
+          label="Title: "
+          type="text"
+          id="titleInput"
+          placeholder="Job Title"
+          onChange={handleTitleChange}
+          value={title}
+        />
+      </div>
+      <div className="mainTasksSection">
+        <InputField
+          label="Main Tasks: "
+          name="mainTasksInput"
+          id="mainTasksInput"
+          type="text"
+          onChange={handleMainTasksChange}
+          value={mainTasks}
+        />
+      </div>
+      <div className="startDateSection">
+        <InputField
+          label="Start Date: "
+          type="date"
+          name="startDateInput"
+          id="startDateInput"
+          onChange={handleStartDateChange}
+          value={startDate}
+        />
+      </div>
+      <div className="endDateSection">
+        <InputField
+          label="End Date: "
+          type="date"
+          name="endDateInput"
+          id="endDateInput"
+          onChange={handleEndDateChange}
+          value={endDate}
+        />
+      </div>
+      <button className="addBtn addExperienceBtn" onClick={addExperienceInfo}>
+        ADD
+      </button>
+    </div>
+  );
+};
 
 export default ExperienceInfo;

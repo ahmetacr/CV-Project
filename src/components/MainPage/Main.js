@@ -1,9 +1,54 @@
 import "../../styles/Main.css";
-import { Component } from "react";
+import React, { useEffect, useState } from "react";
 import InputPage from "./Inputs/InputPage";
 import OutputPage from "./Outputs/OutputPage";
 
-class Main extends Component {
+const Main = (props) => {
+  const [generalInfo, setGeneralInfo] = useState({
+    name: "name",
+    email: "email",
+    phoneNumber: "phoneNumber",
+  });
+
+  const [educationInfoArr, setEducationInfoArr] = useState([]);
+  const [experienceInfoArr, setexperienceInfoArr] = useState([]);
+
+  const updateGeneralInfo = (nameValue, emailValue, phoneNumberValue) => {
+    setGeneralInfo({
+      name: nameValue,
+      email: emailValue,
+      phoneNumber: phoneNumberValue,
+    });
+  };
+
+  const updateExperienceInfo = (experienceInfoObj) => {
+    setEducationInfoArr([...experienceInfoArr, experienceInfoObj]);
+  };
+
+  const updateEducationInfo = (educationInfoObj) => {
+    setexperienceInfoArr([...educationInfoArr, educationInfoObj]);
+  };
+
+  return (
+    <div className="main">
+      <InputPage
+        // handleSubmit={handleSubmit}
+        updateGeneralInfo={updateGeneralInfo}
+        updateEducationInfo={updateEducationInfo}
+        updateExperienceInfo={updateExperienceInfo}
+      />
+      <OutputPage
+        info={{
+          generalInfo: generalInfo,
+          educationInfoArr: educationInfoArr,
+          experienceInfoArr: experienceInfoArr,
+        }}
+      />
+    </div>
+  );
+};
+
+class Main1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
